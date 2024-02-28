@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
             Pair("-",findViewById(R.id.buttonminus)),
             Pair("+",findViewById(R.id.buttonplus)),
             Pair("enter",findViewById(R.id.buttonenter)),
-            Pair("delete",findViewById(R.id.buttondelete))
+            Pair("delete",findViewById(R.id.buttondelete)),
+            Pair("X",findViewById(R.id.buttonmultiply)),
+            Pair("÷",findViewById(R.id.buttondivide))
         )
 
         var valor1Str = ""
@@ -103,6 +105,10 @@ class MainActivity : AppCompatActivity() {
 
 
                     }
+                    "÷" ->{}
+
+
+                    "X" ->{}
 
                     else -> {
                         display.append(i.key)

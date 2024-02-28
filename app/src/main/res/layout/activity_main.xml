@@ -182,7 +182,7 @@
         android:id="@+id/buttondivide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=":"
+        android:text="÷"
         app:layout_constraintBottom_toBottomOf="@+id/buttonmultiply"
         app:layout_constraintEnd_toEndOf="@+id/buttonminus"
         app:layout_constraintHorizontal_bias="0.0"
