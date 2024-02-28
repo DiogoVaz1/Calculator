@@ -19,20 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         display = findViewById(R.id.textView)
         display.text = ""
-/*        buttons = arrayListOf(
-            findViewById(R.id.button0),
-            findViewById(R.id.button1),
-            findViewById(R.id.button2),
-            findViewById(R.id.button3),
-            findViewById(R.id.button4),
-            findViewById(R.id.button5),
-            findViewById(R.id.button6),
-            findViewById(R.id.button7),
-            findViewById(R.id.button8),
-            findViewById(R.id.button9),
-            findViewById(R.id.buttonminus),
-            findViewById(R.id.buttonplus),
-            )*/
 
         buttons = mapOf(
             Pair("0",findViewById(R.id.button0)),
@@ -49,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             Pair("+",findViewById(R.id.buttonplus)),
             Pair("enter",findViewById(R.id.buttonenter)),
             Pair("delete",findViewById(R.id.buttondelete)),
-            Pair("X",findViewById(R.id.buttonmultiply)),
+            Pair("×",findViewById(R.id.buttonmultiply)),
             Pair("÷",findViewById(R.id.buttondivide))
         )
 
@@ -58,43 +44,88 @@ class MainActivity : AppCompatActivity() {
         var valor2Str = ""
         var valor2 : Int? = null
         var valorFinal = 0
-        var boolean = false
+        var conta = ""
+
+
         for (i in buttons){
             i.value.setOnClickListener {
+
                 when(i.key){
+
                     "-" -> {
-                        display.append(i.key)
-                        boolean = false
-                        if (valor1Str == "nada"){
-                            valor1 = valorFinal
-                        }else {
-                            valor1 = valor1Str.toInt()
-                        }
-                    }
-                    "+" -> {
-                        display.append(i.key)
-                        boolean = true
-                        if (valor1Str == "nada"){
-                            valor1 = valorFinal
+                        if(valor1Str == "") {
+                            display.append(i.key)
+                            valor1Str = valor1Str.plus(i.key)
+
+                        }else if(valor1Str == "-") {
+                            valor1Str = ""
+                            display.text = ""
+
                         }else{
-                            valor1 = valor1Str.toInt()
+                            display.append(i.key)
+                            conta = "sub"
+                            if (valor1Str == "nada"){
+                                valor1 = valorFinal
+                            }else {
+                                valor1 = valor1Str.toInt()
+                            }
                         }
+
                     }
+
+                    "+" -> {
+                        if (valor1Str != ""){
+                            display.append(i.key)
+                            conta = "soma"
+                            if (valor1Str == "nada"){
+                                valor1 = valorFinal
+                            }else{
+                                valor1 = valor1Str.toInt()
+                            }
+                        }
+
+                    }
+
+                    "÷" ->{
+                        if (valor1Str != ""){
+                            display.append(i.key)
+                            conta = "dividir"
+                            if (valor1Str == "nada"){
+                                valor1 = valorFinal
+                            }else{
+                                valor1 = valor1Str.toInt()
+                            }
+                        }
+
+
+                    }
+
+                    "×" ->{
+                        if (valor1Str != ""){
+                            display.append(i.key)
+                            conta = "multiplicar"
+                            if (valor1Str == "nada"){
+                                valor1 = valorFinal
+                            }else{
+                                valor1 = valor1Str.toInt()
+                            }
+                        }
+
+                    }
+
                     "enter" -> {
                         if (valor2Str != "") {
                             valor2 = valor2Str.toInt()
                             valor2Str = ""
-                            if (boolean) {
-                                valorFinal = valor1!! + valor2!!
-                            }else{
-                                valorFinal = valor1!! - valor2!!
-                            }
+
+                            valorFinal = fazerConta(conta, valor1, valor2!!, valorFinal)
                             display.text = valorFinal.toString()
                             valor1Str = "nada"
+                            conta = ""
                             valor1 = valorFinal
                         }
-
                     }
+
                     "delete" -> {
                         display.text = ""
                         valor1 = null
@@ -105,10 +136,6 @@ class MainActivity : AppCompatActivity() {
 
 
                     }
-                    "÷" ->{}
-
-
-                    "X" ->{}
 
                     else -> {
                         display.append(i.key)
@@ -124,4 +151,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //Apenas usado quando é clicado o botao Enter
+    private fun fazerConta(conta: String,valor1: Int?, valor2: Int, valorFinal: Int) : Int {
+        var finalFinalValue = 0
+        when(conta){
+            "soma"->{
+                finalFinalValue = valor1!! + valor2
+            }
+
+            "sub"->{
+                finalFinalValue = valor1!! - valor2
+            }
+
+            "multiplicar"->{
+                finalFinalValue = valor1!! * valor2
+            }
+
+            "dividir"->{
+                finalFinalValue = valor1!! / valor2
+            }
+        }
+
+        return finalFinalValue
+    }
 }
