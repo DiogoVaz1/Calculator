@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         var valor2 : Int? = null
         var valorFinal = 0
         var conta = ""
+        var contador = 0
+
 
 
         for (i in buttons){
@@ -53,24 +55,44 @@ class MainActivity : AppCompatActivity() {
                 when(i.key){
 
                     "-" -> {
+
+                        //Se o primeiro numero for necessario, este 1º if deixa colocar um -
                         if(valor1Str == "") {
                             display.append(i.key)
                             valor1Str = valor1Str.plus(i.key)
 
+                        //else if quando se clica 2x no - o simbolo é removido da conta
                         }else if(valor1Str == "-") {
                             valor1Str = ""
                             display.text = ""
 
+                        //Caso ja exista o 1º valor é levado para a conta
                         }else{
                             display.append(i.key)
                             conta = "sub"
+
+                            //OAJFIAHOFuqiwphQWPIU DupviEWyivd GwyiV ygi
+                            /*if (valor1 != null){
+                                if(contador % 3 == 0){
+                                    var text = display.text
+                                    text.substring(0, text.length -1)
+                                    contador++
+                                }else{
+                                    display.append(i.key)
+                                    contador++
+                                }
+                            }*/
+
+
+                            /*Após a primeira conta o valor da string será "nada", caso se queira fazer mais alguma conta com o valor da conta
+                            Este if deixa que o valor final dessa conta seja utilizado como primeiro numero da conta*/
                             if (valor1Str == "nada"){
                                 valor1 = valorFinal
+                                //Caso a string nao tenha o "nada", será apenas colocado o valor normal no Int valor1
                             }else {
                                 valor1 = valor1Str.toInt()
                             }
                         }
-
                     }
 
                     "+" -> {
